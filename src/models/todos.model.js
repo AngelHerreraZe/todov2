@@ -17,12 +17,18 @@ const Todos = db.define("todos", {
     },
     status: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: false
     },
     idCategory: {
         type: DataTypes.INTEGER,
         allowNull: false,
         field: "id_category"
+    },
+    createdBy: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: "created_by"
     }
 },{
     timestamps: true,

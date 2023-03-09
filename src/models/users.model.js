@@ -26,7 +26,7 @@ const Users = db.define("users", {
     },
     idTodo: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         field: "id_todo"
     }
 },{
