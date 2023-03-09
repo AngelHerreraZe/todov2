@@ -3,9 +3,6 @@ const Todos = require('./todos.model');
 const Categories = require('./categories.model');
 
 const initModels = () => {
-    Todos.hasMany(Users, {foreignKey: "idTodo"});
-    Users.belongsTo(Todos, {foreignKey: "idTodo"});
-
     Categories.hasMany(Todos, {foreignKey: 'idCategory'});
     Todos.belongsTo(Categories, {foreignKey: 'idCategory'})
 

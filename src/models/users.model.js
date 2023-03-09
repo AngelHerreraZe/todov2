@@ -23,11 +23,6 @@ const Users = db.define("users", {
     password: {
         type: DataTypes.STRING(50),
         allowNull: false
-    },
-    idTodo: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        field: "id_todo"
     }
 },{
     timestamps: true,

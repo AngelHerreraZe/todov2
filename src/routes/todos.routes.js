@@ -9,14 +9,14 @@ const router = Router();
 router.get("/api/v1/todos", async (req, res)=> {
     try {
         const results = await Todos.findAll({
-            attributes: {exclude: []},
+            attributes: {exclude: ["id", "idCategory", "createdBy", "createdAt"]},
             include: [{
                 model: Categories,
-                attributes: ["id","name"],
+                attributes: ["name"],
             }, 
             {
                 model: Users,
-                attributes: ["id", "username"]
+                attributes: ["username"]
             }]  
         });
         res.json(results);
@@ -50,8 +50,24 @@ router.put('/api/v1/todos/:userId/todo/:todoId', async (req, res) => {
     const {status} = req.body;
 
     try {
-        Todos.update({status},
-            {where: {id: todoId, userId: userId}})
+        const result = await Todos.update({status},
+            {where: {id: todoId, createdBy: userId}})
+        res.json(result)
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
+router.delete("/api/v1/todos/:todoId", async (req, res) => {
+    const {todoId} = req.params;
+
+    try {
+        const result = await Todos.destroy({
+            where: {
+                id: todoId
+            }
+        })
+        res.json(result)
     } catch (error) {
         res.status(400).json(error)
     }
